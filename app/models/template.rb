@@ -20,7 +20,7 @@ class Template < ActiveRecord::Base
   #   "NOUN" => ["PT_NOUN_1", "PT_NOUN_2"]
   # }
   def keywords_by_type
-    words = self.body.scan(PT_KEYWORD)
+    words = self.body.scan(PT_KEYWORD).uniq
     return words.inject({}) do |keywords, word|
       match = word.match(PT_KEYWORD_KEY)
       if match and match.size == 2
