@@ -6,7 +6,7 @@ module WelcomeHelper
     @access_token = access_token
     @user = @graph.get_object("me")
     @name = @user["name"]
-    @photo = @graph.get_picture(friendId)
+    @photo = @graph.get_picture(friendId, :type=>"large")
     puts "hello"
     puts @photo
     @photo
