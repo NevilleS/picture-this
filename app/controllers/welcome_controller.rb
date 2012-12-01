@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     
     # Get the user info
     @graph = Koala::Facebook::API.new(access_token)
+    @access_token = access_token
     @user = @graph.get_object("me")
     @name = @user["name"]
     @email = @user["email"]
