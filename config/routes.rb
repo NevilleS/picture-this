@@ -3,13 +3,13 @@ PictureThis::Application.routes.draw do
 
   get "welcome/login"
 
-  get "welcome/logout"
+  get "welcome/callback"
 
   resources :stories
 
-
   resources :users
 
+  root :to => 'welcome#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
