@@ -19,7 +19,6 @@
   <% @keywords.each do |key, values| %>
     <% values.each do |value| %>
       <div class="field">
-        <p>key: <%= key %>, value: <%= value %></p>
         <%= f.label "Pick a #{key.downcase}" %><br />
         <%= text_field(:keyword, value) %>
       </div>

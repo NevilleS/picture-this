@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
 
     # Substitute the remaining keywords from the hash
     keywords.each do |key, value|
-      self.body.gsub!(key, value)
+      body.gsub!(key, value)
     end
 
     # TODO: validate no keywords left
