@@ -41,6 +41,13 @@ class StoriesController < ApplicationController
 
   # GET /stories/1/edit
   def edit
+    if !current_user? || !access_token?
+      flash[:error] = "Login first"
+      redirect_to welcome_index_path
+    end
+    @user = current_user
+    @access_token = access_token
+    @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
     @story = Story.find(params[:id])
   end
 

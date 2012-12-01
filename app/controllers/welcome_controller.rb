@@ -4,23 +4,28 @@ class WelcomeController < ApplicationController
       redirect_to welcome_login_path
       return
     end
-
-    # Get the user info
-    @graph = Koala::Facebook::API.new(access_token)
     @access_token = access_token
-    @fbuser = @graph.get_object("me")
-    @name = @fbuser["name"]
-    @email = @fbuser["email"]
 
-    # Find the user in our db
-    @user = User.find_by_email(@email)
-    if @user.nil?
-      @user = User.new
-      @user.name = @name
-      @user.email = @email
-      @user.save
+    if !current_user?
+      # Get the user info
+      @graph = Koala::Facebook::API.new(@access_token)
+      @fbuser = @graph.get_object("me")
+      @name = @fbuser["name"]
+      @email = @fbuser["email"]
+      @id = @fbuser["id"]
+
+      # Find the user in our db
+      @user = User.find_by_email(@email)
+      if @user.nil?
+        @user = User.new
+        @user.name = @name
+        @user.email = @email
+        @user.facebook_id = @id
+        @user.save
+      end
+      session[:user_id] = @user.id
     end
-    session[:user_id] = @user.id
+    @user = current_user
   end
 
   def login
