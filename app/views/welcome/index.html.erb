@@ -1,2 +1,23 @@
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
+<p>Here's some things I know about you now.</p>
+<p>Access Token: <%= access_token %></p>
+<p>Email: <%= @email %></p>
+<p>Friends (<%= @friends.size %>):
+  <ul>
+    <% @friends.each do |friend| %>
+      <li><%= friend["name"] %>: id=<%= friend["id"] %></li>
+    <% end %>
+  </ul>
+</p>
+<p>Photos (<%= @photos.size %>):
+  <ul>
+    <% @photos.each do |photo| %>
+      <li>
+      Posted by <%= photo["from"]["name"] %>: tags=<%= photo["tags"]["data"].map { |x| x["name"] } %></br>
+      <%= image_tag photo["picture"] %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+<%= link_to "Logout", welcome_logout_path %>

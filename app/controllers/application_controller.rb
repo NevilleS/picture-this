@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
 
   # Test if a user is logged in
   def access_token?
-    return !current_user.nil?
+    return !access_token.nil?
   end
 end
