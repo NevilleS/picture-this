@@ -1,4 +1,16 @@
 PictureThis::Application.routes.draw do
+  get "welcome/index"
+
+  get "welcome/login"
+
+  get "welcome/logout"
+
+  resources :stories
+
+
+  resources :users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
