@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @template.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @template.body %>
+</p>
+
+<p>
+  <b>Keywords:</b>
+  <ul>
+    <% @keywords.each do |key| %>
+      <li><%= key %></li>
+    <% end %>
+  </ul>
+</p>
+
+<%= link_to 'Edit', edit_template_path(@template) %> |
+<%= link_to 'Back', templates_path %>
