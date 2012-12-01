@@ -11,11 +11,8 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag "story[title]", @template.title %>
   <%= hidden_field_tag :template, @template.id %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
   <% @keywords.each do |key, values| %>
     <% values.each do |value| %>
       <div class="field">
