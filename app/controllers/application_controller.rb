@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
     redirect_to welcome_index_path
   end
 
-  # Get the current user from the session
-  def current_user
+  # Get the access token from the session
+  def access_token
     return session[:access_token]
   end
 
   # Test if a user is logged in
-  def current_user?
+  def access_token?
     return !current_user.nil?
   end
 end

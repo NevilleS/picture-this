@@ -1,12 +1,12 @@
 class WelcomeController < ApplicationController
   def index
-    if !current_user?
+    if !access_token?
       redirect_to welcome_login_path
       return
     end
     
     # Get the user info
-    @graph = Koala::Facebook::API.new(current_user)
+    @graph = Koala::Facebook::API.new(access_token)
     @user = @graph.get_object("me")
     @name = @user["name"]
     @email = @user["email"]
@@ -15,7 +15,7 @@ class WelcomeController < ApplicationController
   end
 
   def login
-    if current_user?
+    if access_token?
       redirect_to welcome_index_path
       return
     end
@@ -36,5 +36,4 @@ class WelcomeController < ApplicationController
     end
     redirect_to welcome_index_path
   end
-
 end
