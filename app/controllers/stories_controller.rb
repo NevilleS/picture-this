@@ -63,8 +63,12 @@ class StoriesController < ApplicationController
     @story = Story.new(params[:story])
     @story.user = current_user
     @template = Template.find(params[:template])
-    puts "Building new story..."
-    @story.build_body(@template, params[:keyword])
+    @story.body = @template.build_body(
+      get_first_name(access_token, @user.facebook_id),
+      get_first_name(access_token, @story.friend_id_1),
+      get_first_name(access_token, @story.friend_id_2),
+      params[:keyword]
+    )
 
     if @story.save
       redirect_to @story, notice: 'Story was successfully created.'

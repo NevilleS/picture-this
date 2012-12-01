@@ -1,8 +1,16 @@
 class Template < ActiveRecord::Base
   PT_KEYWORD = /<PT_\w+>/
   PT_KEYWORD_KEY = /<PT_([A-Z]+)/
+  PT_USER_KEYWORD = "<PT_USER>"
+  PT_FRIEND_1_KEYWORD = "<PT_FRIEND_1>"
+  PT_FRIEND_2_KEYWORD = "<PT_FRIEND_2>"
 
   attr_accessible :body, :title
+
+  # Return a random template from the database
+  def self.random
+    return Template.all.last
+  end
 
   # Get a hash of all keywords used in the template, sorted by type:
   # {
@@ -30,7 +38,24 @@ class Template < ActiveRecord::Base
     return keywords.select { |key| !["USER", "FRIEND"].include?(key) }
   end
 
-  def self.random
-    return Template.all.last
+  # Generate a story body from the given template and keyword hash
+  def build_body(user, friend_1, friend_2, keywords)
+    # Make a copy of the template body
+    body = self.body
+
+    # Substitute user name
+    body.gsub!(PT_USER_KEYWORD, user)
+
+    # Substitute friend names
+    body.gsub!(PT_FRIEND_1_KEYWORD, friend_1)
+    body.gsub!(PT_FRIEND_2_KEYWORD, friend_2)
+
+    # Substitute the remaining keywords from the hash
+    keywords.each do |key, value|
+      body.gsub!(key, value)
+    end
+
+    # TODO: validate no keywords left
+    return body
   end
 end

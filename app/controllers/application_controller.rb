@@ -42,6 +42,15 @@ class ApplicationController < ActionController::Base
     return graph.get_connections("me", "friends")
   end
 
+  # Get a person's first name
+  def get_first_name(access_token, id)
+    graph = Koala::Facebook::API.new(access_token)
+    user = graph.get_object(id)
+    if user
+      return user["first_name"]
+    end
+    return nil
+  end
   # Get a random template
   def get_random_template
     # TODO: random...?
