@@ -6,3 +6,12 @@
 <% @testPic %>
 </br>
 <%= image_tag @testPic %>
+
+
+<h2>Get a random  picture of two people together (scaled beautifully)</h2>
+<% @friendshiptPic = getFriendshipPhoto(122604676, 122603619, @access_token, 300, 300) %>
+
+<%= raw @friendshiptPic %>
+</br>
+
+
