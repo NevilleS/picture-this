@@ -9,9 +9,18 @@
 
 
 <h2>Get a random  picture of two people together (scaled beautifully)</h2>
-<% @friendshiptPic = getFriendshipPhoto(122604676, 122603619, @access_token, 300, 300) %>
+<!-- Jaclyn : 122603389 -->
+<!-- Armon : 122604676 -->
+<!-- Perry : 122603619 -->
+<% @friendshiptPic = getFriendshipPhoto(122604676, 122603389, @access_token, 300, 300) %>
 
 <%= raw @friendshiptPic %>
+
+
+<h2>Get a random picture of a person (scaled beautifully)</h2>
+<% @friendPic = getFriendPhoto(122603619, @access_token, 300, 300) %>
+
+<%= raw @friendPic %>
 </br>
 
 
