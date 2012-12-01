@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
   APPID = "124425631049732"
   SECRET = "d59961eaa65bfa35f31b55f36db66280"
 
-  # Other constants
-  PT_KEYWORD = /PT_\w+/
-
   # Logout of the application
   def logout
     session[:access_token] = nil
@@ -43,5 +40,20 @@ class ApplicationController < ActionController::Base
   def get_friends(access_token)
     graph = Koala::Facebook::API.new(access_token)
     return graph.get_connections("me", "friends")
+  end
+
+  # Get a person's first name
+  def get_first_name(access_token, id)
+    graph = Koala::Facebook::API.new(access_token)
+    user = graph.get_object(id)
+    if user
+      return user["first_name"]
+    end
+    return nil
+  end
+  # Get a random template
+  def get_random_template
+    # TODO: random...?
+    return Template.find(1)
   end
 end

@@ -14,7 +14,7 @@ class TemplatesController < ApplicationController
   # GET /templates/1.json
   def show
     @template = Template.find(params[:id])
-    @keywords = @template.body.scan(PT_KEYWORD)
+    @keywords = @template.keywords_by_type.values
 
     respond_to do |format|
       format.html # show.html.erb

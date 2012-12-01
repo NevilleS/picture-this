@@ -31,6 +31,8 @@ class StoriesController < ApplicationController
     @user = current_user
     @access_token = access_token
     @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
+    @template = Template.random
+    @keywords = @template.keywords_to_specify
     @story = Story.new
 
     respond_to do |format|
@@ -52,23 +54,26 @@ class StoriesController < ApplicationController
   end
 
   # POST /stories
-  # POST /stories.json
   def create
     if !current_user?
       flash[:error] = "Login first"
       redirect_to welcome_index_path
     end
+    @user = current_user
     @story = Story.new(params[:story])
     @story.user = current_user
+    @template = Template.find(params[:template])
+    @story.body = @template.build_body(
+      get_first_name(access_token, @user.facebook_id),
+      get_first_name(access_token, @story.friend_id_1),
+      get_first_name(access_token, @story.friend_id_2),
+      params[:keyword]
+    )
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render json: @story, status: :created, location: @story }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    if @story.save
+      redirect_to @story, notice: 'Story was successfully created.'
+    else
+      redirect_to welcome_index_path, notice: 'Problem building story.'
     end
   end
 
