@@ -1,9 +1,13 @@
 PictureThis::Application.routes.draw do
+  get "static_pages/methods"
+
   get "welcome/index"
 
   get "welcome/login"
 
   get "welcome/callback"
+  
+  get "static_pages/methods"
 
   resources :stories
 

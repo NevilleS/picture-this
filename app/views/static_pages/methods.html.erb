@@ -1,0 +1,8 @@
+<h1>Examples of how all our facebook api accessor methods work</h1>
+
+<h2>Get a Friend's Profile Picture</h2>
+ 
+<%= @testPic = getFriendPic(28100762, @access_token) %>
+<% @testPic %>
+</br>
+<%= image_tag @testPic %>
