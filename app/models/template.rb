@@ -1,4 +1,7 @@
 class Template < ActiveRecord::Base
+  PT_KEYWORD = /PT_\w+/
+  PT_KEYWORD_KEY = /PT_([A-Z]+)/
+
   attr_accessible :body, :title
 
   # Get a hash of all keywords used in the template, sorted by type:
@@ -9,7 +12,7 @@ class Template < ActiveRecord::Base
   #   "NOUN" => ["PT_NOUN_1", "PT_NOUN_2"]
   # }
   def keywords_by_type
-    words = @template.body.scan(PT_KEYWORD)
+    words = self.body.scan(PT_KEYWORD)
     return words.inject({}) do |keywords, word|
       match = word.match(PT_KEYWORD_KEY)
       if match and match.size == 2
@@ -25,5 +28,9 @@ class Template < ActiveRecord::Base
   def keywords_to_specify
     keywords = keywords_by_type
     return keywords.select { |key| !["USER", "FRIEND"].include?(key) }
+  end
+
+  def self.random
+    return Template.all.last
   end
 end

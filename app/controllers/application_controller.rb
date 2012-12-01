@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
   APPID = "124425631049732"
   SECRET = "d59961eaa65bfa35f31b55f36db66280"
 
-  # Other constants
-  PT_KEYWORD = /PT_\w+/
-
   # Logout of the application
   def logout
     session[:access_token] = nil

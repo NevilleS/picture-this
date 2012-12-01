@@ -31,7 +31,7 @@ class StoriesController < ApplicationController
     @user = current_user
     @access_token = access_token
     @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
-    @template = get_random_template
+    @template = Template.random
     @keywords = @template.keywords_to_specify
     @story = Story.new
 
