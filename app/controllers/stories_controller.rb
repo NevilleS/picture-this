@@ -24,11 +24,13 @@ class StoriesController < ApplicationController
   # GET /stories/new
   # GET /stories/new.json
   def new
-    if !current_user?
+    if !current_user? || !access_token?
       flash[:error] = "Login first"
       redirect_to welcome_index_path
     end
     @user = current_user
+    @access_token = access_token
+    @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
     @story = Story.new
 
     respond_to do |format|

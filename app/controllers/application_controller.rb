@@ -35,4 +35,10 @@ class ApplicationController < ActionController::Base
   def current_user?
     return !current_user.nil?
   end
+
+  # Get the user's friends
+  def get_friends(access_token)
+    graph = Koala::Facebook::API.new(access_token)
+    return graph.get_connections("me", "friends")
+  end
 end
