@@ -1,6 +1,6 @@
 class Template < ActiveRecord::Base
-  PT_KEYWORD = /PT_\w+/
-  PT_KEYWORD_KEY = /PT_([A-Z]+)/
+  PT_KEYWORD = /<PT_\w+>/
+  PT_KEYWORD_KEY = /<PT_([A-Z]+)/
 
   attr_accessible :body, :title
 
