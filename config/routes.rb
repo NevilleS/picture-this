@@ -1,4 +1,7 @@
 PictureThis::Application.routes.draw do
+  resources :templates
+
+
   get "static_pages/methods"
 
   get "welcome/index"
