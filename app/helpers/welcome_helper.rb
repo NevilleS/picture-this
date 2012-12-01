@@ -44,7 +44,7 @@ module WelcomeHelper
   end
 
 
-  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
+  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height, autofallback)
     
     @graph = Koala::Facebook::API.new(access_token)
     @access_token = access_token
@@ -52,9 +52,8 @@ module WelcomeHelper
     
     @data = @graph.fql_query(query)
     @rand_picture = @data[rand(@data.size)]
-    if @rand_picture.nil?
+    if @rand_picture.nil? and autofallback
       return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
-      return_image_string
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
@@ -77,8 +76,8 @@ module WelcomeHelper
       puts @rand_picture["src_big"]
 
       return_image_string = "<img src=\"" + @rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
-      return_image_string
     end
+    return_image_string
   end
 
 end
