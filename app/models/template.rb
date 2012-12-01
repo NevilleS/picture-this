@@ -9,7 +9,11 @@ class Template < ActiveRecord::Base
 
   # Return a random template from the database
   def self.random
-    return Template.all.last
+    count = Template.count
+    if count > 0
+      return Template.all[rand(count)]
+    end
+    return nil
   end
 
   # Get a hash of all keywords used in the template, sorted by type:
