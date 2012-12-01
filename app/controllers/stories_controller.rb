@@ -54,23 +54,22 @@ class StoriesController < ApplicationController
   end
 
   # POST /stories
-  # POST /stories.json
   def create
     if !current_user?
       flash[:error] = "Login first"
       redirect_to welcome_index_path
     end
+    @user = current_user
     @story = Story.new(params[:story])
     @story.user = current_user
+    @template = Template.find(params[:template])
+    puts "Building new story..."
+    @story.build_body(@template, params[:keyword])
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render json: @story, status: :created, location: @story }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    if @story.save
+      redirect_to @story, notice: 'Story was successfully created.'
+    else
+      redirect_to welcome_index_path, notice: 'Problem building story.'
     end
   end
 
