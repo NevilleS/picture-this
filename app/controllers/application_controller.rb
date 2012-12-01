@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # Logout of the application
   def logout
     session[:access_token] = nil
+    session[:current_user] = nil
     flash[:notice] = "Logged out"
     redirect_to welcome_index_path
   end
@@ -20,5 +21,18 @@ class ApplicationController < ActionController::Base
   # Test if a user is logged in
   def access_token?
     return !access_token.nil?
+  end
+
+  # Get the current user
+  def current_user
+    unless session[:user_id].nil?
+      return User.find(session[:user_id])
+    end
+    return nil
+  end
+
+  # Test for the current user
+  def current_user?
+    return !current_user.nil?
   end
 end

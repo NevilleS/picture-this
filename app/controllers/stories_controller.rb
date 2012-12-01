@@ -24,6 +24,11 @@ class StoriesController < ApplicationController
   # GET /stories/new
   # GET /stories/new.json
   def new
+    if !current_user?
+      flash[:error] = "Login first"
+      redirect_to welcome_index_path
+    end
+    @user = current_user
     @story = Story.new
 
     respond_to do |format|
@@ -40,7 +45,12 @@ class StoriesController < ApplicationController
   # POST /stories
   # POST /stories.json
   def create
+    if !current_user?
+      flash[:error] = "Login first"
+      redirect_to welcome_index_path
+    end
     @story = Story.new(params[:story])
+    @story.user = current_user
 
     respond_to do |format|
       if @story.save
