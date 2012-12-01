@@ -44,4 +44,10 @@ class ApplicationController < ActionController::Base
     graph = Koala::Facebook::API.new(access_token)
     return graph.get_connections("me", "friends")
   end
+
+  # Get a random template
+  def get_random_template
+    # TODO: random...?
+    return Template.find(1)
+  end
 end
