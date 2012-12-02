@@ -25,6 +25,9 @@ gem 'jquery-rails'
 # Include Koala, for Facebook Graph integration
 gem 'koala'
 
+# Encrypt our ids
+gem 'encrypted_id'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
