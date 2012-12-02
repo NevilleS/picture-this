@@ -10,7 +10,7 @@ Template.create(
   title: "Epic Road Trip",
   body:
   %{
-    <p>
+    <div class="storyfont">
     <br/><br/><br/><br/><br/><br/>
     Picture this...<br/><br/><br/><br/><br/><br/>
 
@@ -34,6 +34,6 @@ Template.create(
     Morale of the story: always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_OBJECTS_3>.<br />
     <br/><br/><br/><br/><br/><br/>
 
-    </p>
+    </div>
   }
 )

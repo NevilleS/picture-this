@@ -60,26 +60,26 @@ html, body {margin:0;padding:0;height:100%;}
 	top:0;
 }
 
-.color-change {
-  -webkit-transition-property: background-color;
-  -moz-transition-property: background-color;
-  -o-transition-property: background-color;
-  transition-property: background-color;
-  -webkit-transition-duration: 1s;
-  -moz-transition-duration: 1s;
-  -o-transition-duration: 1s;
-  transition-duration: 1s;
+.error_text {
+  font-size: 8pt;
+  font-family: calibri;
 }
 
-
-
 .storyplotDiv {
-  padding-left: 40px;
-  width: 100%; 
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
   font-family: cool_font;
   font-size: 18pt;
+  line-height: 150%;
 }
+
+.storyfont {
+  font-family: cool_font;
+  font-size: 18pt;
+}
+
 
 
 .logomain {
