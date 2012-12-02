@@ -11,11 +11,11 @@
             </div>
             <div id="actionitem">
               <% if @user %>
-              <p>Welcome, <%= @user.name %>!</p>
-              <h2><%= link_to 'Create a story!', new_story_path %></h2>
-            <% else %>
-              <%= link_to "Login with Facebook", @fb_login_url %>
-            <% end %>
+                Welcome, <%= @user.name %>!
+                <h2><%= link_to 'Create a story!', new_story_path %></h2>
+              <% else %>
+                <%= link_to "Login with Facebook", @fb_login_url %>
+              <% end %>
             </div>
         </div>
         <div id="quote">

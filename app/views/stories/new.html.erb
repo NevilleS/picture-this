@@ -6,11 +6,11 @@
       <%= form_tag("/stories") do %>
         <div class="field">
           Pick a <b><%= label_tag "Friend" %></b><br />
-          <%= select(:story, :friend_id_1, @friends, {:include_blank => true}) %>
+          <%= select(:story, :friend_id_1, @friends.sort, {:include_blank => true}) %>
         </div>
         <div class="field">
           Pick another <b><%= label_tag "Friend" %></b><br />
-          <%= select(:story, :friend_id_2, @friends, {:include_blank => true}) %>
+          <%= select(:story, :friend_id_2, @friends.sort, {:include_blank => true}) %>
         </div>
         <div class="actions">
           <%= submit_tag 'Next' %>
