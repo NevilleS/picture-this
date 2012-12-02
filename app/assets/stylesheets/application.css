@@ -85,31 +85,27 @@ html, body {margin:0;padding:0;height:100%;}
 }
 
 .storyline1 {
-  background-color: #999999;
   padding-top: 20px;
   padding-bottom: 20px;
+  text-align: center;
 }
 
 .storyline2 {
-  background-color: #999999;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .storyline3 {
-  background-color: #999999;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .storyline4 {
-  background-color: #999999;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .storyline5 {
-  background-color: #999999;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -123,6 +119,9 @@ html, body {margin:0;padding:0;height:100%;}
   text-align: center;
 }
 
+.storybackgroundgrey {
+  background-image:url('/assets/backgroundgrey.png');
+}
 
 
 
