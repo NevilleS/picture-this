@@ -1,0 +1,185 @@
+html, body {margin:0;padding:0;height:100%;}
+
+@font-face {
+	font-family: cool_font;
+	src: url('JandaSafeandSoundSolid.ttf');
+}
+
+@font-face {
+	font-family: bubble_font;
+	src: url('JandaManateeSolid.ttf');
+}
+
+
+
+/*This defines the borders of the page*/
+#top, #bottom, #left, #right {
+  background: #286fbe;
+  position: fixed;
+  z-index: 1000;
+}
+
+#left, #right {
+  top: 0;
+  bottom: 0;
+  width: 15px;
+}
+
+#left {
+  left: 0;
+}
+
+#right {
+  right: 0;
+}
+
+#bottom, #top {
+  left: 0;
+  right: 0;
+  height: 15px;
+}
+
+#bottom {
+	bottom:0;
+}
+
+#top {
+	top:0;
+}
+
+#storyDiv {
+  display:block;
+  position:absolute;
+  height:auto;
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
+  color:#000000;
+  margin-top: 15px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+  overflow: hidden; /* or auto or scroll */
+  font-family: cool_font;
+  font-size:24pt;
+}
+
+.storypictureDiv {
+    display: table;
+    float: right;
+    overflow: hidden;
+    width: 50%; 
+    height: 100%;
+}
+
+.storypictureDiv a {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+
+.storyplotDiv {
+    display: table;
+    float: left;
+    overflow: hidden;
+    width: 40%; 
+    height: 100%;
+}
+
+.storyplotDiv a {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+#background {
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: -999; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+
+#fullDiv {
+  display:block;
+  position:absolute;
+  height:auto;
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(256,256,256,0.9);
+  color:#000000;
+  border:2px solid #666666;
+  overflow: hidden; /* or auto or scroll */
+}
+
+
+.logo {
+	position: fixed;
+	height:100px;
+	width:100%;
+	float:left;
+	padding-left:20px;
+	padding-top:20px;
+	text-align: center;
+}
+
+#centercontent {
+	position:relative;
+	width:100%;
+	height:500px;
+}
+
+#tagline {
+	position:relative;
+	font-family: cool_font;
+	width:40%;
+	float:left;
+	padding-left:50px;
+	margin-top:150px; 
+	font-size: 28pt;
+	font-weight: 900;
+	text-align: center;
+	color: #286fbe;
+}
+
+#actionitem {
+	position:relative;
+	width:40%;
+	float:right;
+	margin-top:150px;
+}
+
+#quote {
+	position:relative;
+	width: 100%;
+	height: 100px;
+	font-family: calibri;
+	font-size: 30pt;
+	font-weight: 1200;
+	text-align: center;
+	color:#1B4199;
+}
+

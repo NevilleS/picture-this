@@ -1,0 +1,61 @@
+<head>
+<meta charset="UTF-8" />
+  <title>Test</title>
+
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'/>
+    
+<style type='text/css'>
+img { behavior: url(iepngfix.htc) }
+#pageflip {
+position: absolute;
+right: 0; top: 0;
+float: right;
+}
+#pageflip img {
+width: 50px; height: 52px;
+z-index: 99;
+position: absolute;
+right: 0; top: 0;
+-ms-interpolation-mode: bicubic;
+}
+#pageflip .back-img {
+width: 50px; height: 50px;
+overflow: hidden;
+position: absolute;
+right: 0; top: 0;z-index:98;
+background: url(http://2.bp.blogspot.com/-ozIbZSc4kLo/T1SpesMOYpI/AAAAAAAAAKM/NtX4Wf48t_o/s200/rss+netoops+blog+page+peel.png) no-repeat right top #fff;
+}
+</style><a href='http://www.facebook.com'><img src='pictures/camera.png'/></a><script type='text/javascript'>
+$(document).ready(function(){
+//Page Flip on hover
+$(&quot;#pageflip&quot;).hover(function() {
+$(&quot;#pageflip img , .back-img&quot;).stop()
+    .animate({
+    width: &#39;307px&#39;,
+    height: &#39;319px&#39;
+    }, 500);
+    } , function() {
+    $(&quot;#pageflip img&quot;).stop()
+    .animate({
+    width: &#39;50px&#39;,
+    height: &#39;52px&#39;
+    }, 220);
+$(&quot;.back-img&quot;).stop()
+    .animate({
+    width: &#39;50px&#39;,
+    height: &#39;50px&#39;
+    }, 200);
+});
+});
+</script>
+
+</head>
+
+<body>
+
+    <div id='pageflip'>
+<a href='http://www.facebook.com'><img alt='netoops blog' src='http://2.bp.blogspot.com/_1fRuBdlSpLw/TJcc3k62mWI/AAAAAAAAAps/uSj6nCe_CB4/s1600/page_flip.png'/></a>
+<div class='back-img'/>
+</div>
+
+</body>
