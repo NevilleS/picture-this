@@ -5,14 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Template.delete_all
 Template.create(
   title: "Epic Road Trip",
   body:
   %{<p>
+    <PT_IMAGE_4><br />
     Picture this... <PT_USER> and <PT_FRIEND_1> were packing up their <PT_VEHICLE_1> for their road trip to <PT_PLACE_1>.<br />
+    <PT_IMAGE_4><br />
     When all of a sudden <PT_NUMBER_1> <PT_OBJECTS_1> fell from <PT_LOCATION_1>!<br />
+    <PT_IMAGE_4><br />
     <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_OBJECTS_2> and ran for shelter.<br />
+    <PT_IMAGE_3><br />
     It looked like their road trip might not happen. Just as they were about to give up, <PT_FRIEND_2> showed up with <PT_OBJECTS_3> and saved the day!<br />
+    <PT_IMAGE_7><br />
     Morale of the story: always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_OBJECTS_3>.<br />
     </p>
   }
