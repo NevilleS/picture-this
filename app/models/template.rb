@@ -1,6 +1,6 @@
 class Template < ActiveRecord::Base
-  PT_KEYWORD = /<PT_\w+>/
-  PT_KEYWORD_KEY = /<PT_([A-Z]+)/
+  PT_KEYWORD = /<PT_.*?>/
+  PT_KEYWORD_KEY = /<PT_([A-Za-z()\- ]+)/
   PT_USER_KEYWORD = "<PT_USER>"
   PT_FRIEND_1_KEYWORD = "<PT_FRIEND_1>"
   PT_FRIEND_2_KEYWORD = "<PT_FRIEND_2>"
@@ -48,16 +48,16 @@ class Template < ActiveRecord::Base
     body = self.body
 
     # Substitute user name
-    body.gsub!(PT_USER_KEYWORD, user)
+    body.gsub!(PT_USER_KEYWORD, "<strong>#{user}</strong>")
 
     # Substitute friend names
-    body.gsub!(PT_FRIEND_1_KEYWORD, friend_1)
-    body.gsub!(PT_FRIEND_2_KEYWORD, friend_2)
+    body.gsub!(PT_FRIEND_1_KEYWORD, "<strong>#{friend_1}</strong>")
+    body.gsub!(PT_FRIEND_2_KEYWORD, "<strong>#{friend_2}</strong>")
 
     # Substitute the remaining keywords from the hash
     keywords.each do |key, value|
       value = value.pluralize if key =~ /PLURAL/
-      body.gsub!(key, value)
+      body.gsub!(key, "<strong>#{value}</strong>")
     end
 
     # Substitute the image keywords from the hash

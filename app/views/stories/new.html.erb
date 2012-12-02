@@ -2,7 +2,7 @@
   <%= image_tag "background.png", :class => "stretch" %>
   <div id="fullDiv">
     <div class="logo">
-          <%= image_tag "camera2.png", :height => "100%" %>
+          <%= link_to(image_tag("camera2.png", :height => "100%"), welcome_index_path) %>
     </div>
     <div class="imagecenter">
       <h1>Choose some friends!</h1>
@@ -16,7 +16,7 @@
           <%= select(:story, :friend_id_2, @friends.sort, {:include_blank => true}) %>
         </div>
         <div class="actions">
-          <%= submit_tag 'Next' %>
+          <%= image_submit_tag "next-button.png" %>
         </div>
       <% end %>
     </div>

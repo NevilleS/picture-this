@@ -19,6 +19,16 @@ class StoriesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @story }
     end
+     @graph = Koala::Facebook::API.new(access_token)
+     #@fb_share_url = @graph.put_connections("me", "notes", :subject => "Picture This!", :message => "We've got a new story about some friends", :link=>"http://google.co    m", :tags => @story.friend_id_1, :place=>"7258671679") 
+     
+     puts "------------ ABOUT TO POST DATA TO FACEBOOK! -------------------"
+     puts access_token
+
+     
+     
+#     @fb_share_url = Net::HTTP.post_form(URI.parse('https://graph.facebook.com/'+@story.user.facebook_id.to_s+'/feed'), {'access_token'=>access_token, 'message'=>'This is test post from the Graph API', 'picture'=>'http://picturethishappening.com/assets/camera2-0964d0a6e493326ab41ab644a10ce294.png', 'link'=>'http://picturethishappening.com', 'name'=>'Picture This...', 'caption'=>'A new story has been posted!'})
+ #    puts @fb_share_url
   end
 
   # GET /stories/new
@@ -30,7 +40,8 @@ class StoriesController < ApplicationController
     @user = current_user
     @access_token = access_token
     @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
-    session[:template_id] = Template.random.id
+    @template = Template.random
+    session[:template_id] = @template.id
     session[:story_params] = nil
     session[:images] = nil
     session[:keywords] = nil

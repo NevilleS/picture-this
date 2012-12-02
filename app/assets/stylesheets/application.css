@@ -71,13 +71,13 @@ body div {
 .error_text {
   font-size: 12pt;
   font-family: calibri;
-  width: 750px;
+  width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .storyplotDiv {
-  width: 750px;
+  width: 600px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -123,8 +123,11 @@ body div {
   padding-bottom: 20px;
 }
 
+
+
 .imagecenter {
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .centerthisbitch {
@@ -244,7 +247,7 @@ body div {
 	font-size: 20pt;
 	font-weight: 1200;
 	text-align: center;
-	color:#1B4199;
+	color:#444444;
 }
 
 /* Form style */
