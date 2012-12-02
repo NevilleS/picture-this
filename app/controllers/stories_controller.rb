@@ -166,8 +166,11 @@ class StoriesController < ApplicationController
       # Ensure uniqueness ...
       i = 0
       while i < 3 do
-        if isUniquePhoto?(data[rand_index]["src_big"])
+        if !isUniquePhoto?(data[rand_index]["src_big"])
+          rand_index = rand(data.size)
+        else
           rand_picture = data[rand_index]
+          break
         end
         i += 1
       end
@@ -229,6 +232,7 @@ class StoriesController < ApplicationController
           rand_index = rand(data.size)
         else
           rand_picture = data[rand_index]
+          break
         end
         i += 1
       end
@@ -283,6 +287,7 @@ class StoriesController < ApplicationController
           rand_index = rand(data.size) 
         else
           rand_picture = data[rand_index]
+          break
         end
         i += 1
       end
