@@ -1,20 +1,10 @@
-<!--
-  <div class="color-change" id="left"></div>
-  <div class="color-change" id="right"></div>
-  <div class="color-change" id="top"></div>
-  <div class="color-change" id="bottom"></div>
-  
-  <div class="storybackgroundgrey">
--->
-
 <div id="background">
   <%= image_tag "background.png", :class => "stretch" %>
   <div id="fullDiv2">
 
     <div class="logo">
-      <%= image_tag "camera2.png", :height => "100%" %>
+      <%= link_to(image_tag("camera2.png", :height => "100%"), welcome_index_path) %>
     </div>
- 
       <%= raw(@story.body) %>
   </div>
 

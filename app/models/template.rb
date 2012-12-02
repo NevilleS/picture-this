@@ -1,6 +1,6 @@
 class Template < ActiveRecord::Base
   PT_KEYWORD = /<PT_.*?>/
-  PT_KEYWORD_KEY = /<PT_([A-Za-z() ]+)/
+  PT_KEYWORD_KEY = /<PT_([A-Za-z()\- ]+)/
   PT_USER_KEYWORD = "<PT_USER>"
   PT_FRIEND_1_KEYWORD = "<PT_FRIEND_1>"
   PT_FRIEND_2_KEYWORD = "<PT_FRIEND_2>"
