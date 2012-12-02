@@ -27,7 +27,7 @@ html, body {margin:0;padding:0;height:100%;}
 
 /*This defines the borders of the page*/
 #top, #bottom, #left, #right {
-  background: #982DAD;
+  background: #286fbe;
   position: fixed;
   z-index: 1000;
 }
@@ -61,7 +61,7 @@ html, body {margin:0;padding:0;height:100%;}
 }
 
 .error_text {
-  font-size: 8pt;
+  font-size: 12pt;
   font-family: calibri;
 }
 
@@ -75,10 +75,57 @@ html, body {margin:0;padding:0;height:100%;}
   line-height: 150%;
 }
 
+.titlestory {
+  font-family: cool_font;
+  font-size: 30pt;
+  text-align: center;
+}
+
 .storyfont {
   font-family: cool_font;
   font-size: 18pt;
 }
+
+.storyline1 {
+  background-color: #999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.storyline2 {
+  background-color: #999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.storyline3 {
+  background-color: #999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.storyline4 {
+  background-color: #999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.storyline5 {
+  background-color: #999999;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.imagecenter {
+  text-align: center;
+}
+
+.centerthisbitch {
+  padding-left: 25px;
+  text-align: center;
+}
+
+
 
 
 
@@ -130,8 +177,8 @@ html, body {margin:0;padding:0;height:100%;}
 	position: fixed;
 	height:50px;
 	float:left;
-	padding-left:20px;
-	padding-top:10px;
+	padding-left:30px;
+	padding-top:20px;
 }
 
 #centercontent {

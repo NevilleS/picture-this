@@ -1,3 +1,10 @@
+
+<div id="background">
+  <%= image_tag "background.png", :class => "stretch" %>
+    <div id="fullDiv">
+
+<div class="centercontent">
+
 <%= form_for(@story) do |f| %>
   <% if @story.errors.any? %>
     <div id="error_explanation">
@@ -32,4 +39,8 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
+
+</div>
+</div></div>
