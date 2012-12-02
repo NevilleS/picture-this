@@ -10,8 +10,8 @@ Template.create(
   title: "Epic Road Trip",
   body:
   %{
-    <div class='layout-full' div id='982DAD'>
     <p>
+    <br/><br/><br/><br/><br/><br/>
     Picture this...<br/><br/><br/><br/><br/><br/>
     <div class='layout-full' id='24C0DE'>
     <PT_IMAGE_1><br />

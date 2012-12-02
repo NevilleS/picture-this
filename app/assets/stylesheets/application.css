@@ -71,17 +71,12 @@ html, body {margin:0;padding:0;height:100%;}
   transition-duration: 1s;
 }
 
-.storypictureDiv {
-    float: right;
-    overflow: hidden;
-    width: 50%; 
-}
 
 
 .storyplotDiv {
   padding-left: 40px;
-
-    width: 40%; 
+  width: 100%; 
+  text-align: center;
 }
 
 
