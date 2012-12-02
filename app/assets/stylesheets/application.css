@@ -120,8 +120,6 @@ html, body {margin:0;padding:0;height:100%;}
 
 
 
-
-
 #background {
     width: 100%; 
     height: 100%; 
@@ -166,7 +164,7 @@ html, body {margin:0;padding:0;height:100%;}
 #centercontent {
 	position:relative;
 	width:100%;
-	height:500px;
+	height:700px;
 }
 
 #tagline {
@@ -180,6 +178,7 @@ html, body {margin:0;padding:0;height:100%;}
 	font-weight: 900;
 	text-align: center;
 	color: #286fbe;
+  line-height: 150%;
 }
 
 #actionitem {
