@@ -6,28 +6,8 @@
 <div class="centerthisbitch"><br/><br/>
 
 <%= form_for(@story) do |f| %>
-  <% if @story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
-
-      <ul>
-      <% @story.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <%= hidden_field_tag "story[title]", @template.title %>
   <%= hidden_field_tag :template, @template.id %>
-  <% @keywords.each do |key, values| %>
-    <% values.each do |value| %>
-      <div class="field">
-        <%= f.label "Pick a #{key.downcase}" %><br />
-        <%= text_field(:keyword, value) %>
-      </div>
-    <% end %>
-  <% end %>
   <div class="field">
     <%= f.label "Pick a friend" %><br />
     <%= select(:story, :friend_id_1, @friends, {:include_blank => true}) %>
@@ -36,6 +16,14 @@
     <%= f.label "Pick another friend" %><br />
     <%= select(:story, :friend_id_2, @friends, {:include_blank => true}) %>
   </div>
+  <% @keywords.each do |key, values| %>
+    <% values.each do |value| %>
+      <div class="field">
+        <%= f.label "Pick a #{key.downcase}" %><br />
+        <%= text_field(:keyword, value) %>
+      </div>
+    <% end %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

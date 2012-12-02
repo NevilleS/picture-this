@@ -1,6 +1,8 @@
 class WelcomeController < ApplicationController
   def index
     if !access_token?
+      session[:user_id] = nil
+
       # Send an oauth request to Facebook
       @oauth = Koala::Facebook::OAuth.new(APPID, SECRET, welcome_callback_url)
       @fb_login_url = @oauth.url_for_oauth_code(:permissions => "email,user_photos,friends_photos,publish_stream")

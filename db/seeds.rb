@@ -13,45 +13,44 @@ Template.create(
     
     <br/><br/><br/>
     <div class="titlestory"> Picture this...</div><br/><br/>
-    
     <div class="storyline1"> <div class="storyplotDiv">
       <PT_USER> and <PT_FRIEND_1> were packing up their <PT_VEHICLE_1> for their road trip to <PT_PLACE_1>.<br />
     </div></div><br/><br/>
     <div class="storyfont">
-      <div class="imagecenter"><PT_IMAGE_1> 
+      <div class="imagecenter"><PT_IMAGE_4_1> 
       <br/><br/>
       <img src="/assets/divider.png">
     </div>
      
     <div class="storyline2"> <div class="storyplotDiv">
-      When all of a sudden <PT_NUMBER_1> <PT_OBJECTS_1> fell from <PT_LOCATION_1>!<br />
+      When all of a sudden, <PT_FRIEND_1> saw <PT_NUMBER_1> <PT_NOUN_PLURAL_1> fall from <PT_LOCATION_1>!<br />
     </div></div><br/><br/>
-    <div class="imagecenter"><PT_IMAGE_2>
+    <div class="imagecenter"><PT_IMAGE_2_1>
       <br/><br/>
       <img src="/assets/divider.png">
     </div>
     
     <div class="storyline3"> <div class="storyplotDiv">
-      <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_OBJECTS_2> and ran for shelter.<br />
+      <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_NOUN_PLURAL_2> and ran for shelter.<br />
     </div></div><br/><br/>
-    <div class="imagecenter"><PT_IMAGE_4> 
+    <div class="imagecenter"><PT_IMAGE_4_1> 
       <br /><br/>
       <img src="/assets/divider.png">
     </div> 
     
     <div class="storyline4"> <div class="storyplotDiv">
       It looked like their road trip might not happen :( <br/> 
-      Just as they were about to give up, <PT_FRIEND_2> showed up with <PT_OBJECTS_3> and saved the day!<br />
+      Just as they were about to give up, <PT_FRIEND_2> showed up with <PT_NOUN_PLURAL_3> and saved the day!<br />
     </div></div><br/><br/>  
-    <div class="imagecenter"><PT_IMAGE_3>
+    <div class="imagecenter"><PT_IMAGE_3_1>
       <br/><br/>
       <img src="/assets/divider.png">
     </div>
     
     <div class="storyline5"> <div class="storyplotDiv">
-      MORALE OF THE STORY: <br/> always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_OBJECTS_3>.<br />
+      MORALE OF THE STORY: <br/> always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_NOUN_PLURAL_3>.<br />
     </div></div><br/><br/>
-    <div class="imagecenter"><PT_IMAGE_7>
+    <div class="imagecenter"><PT_IMAGE_7_1>
       <br /><br/>
     </div>
     </div>

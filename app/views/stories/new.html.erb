@@ -1,5 +1,21 @@
-<h1>New story for <%= @user.name %></h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', welcome_index_path %>
+<div id="background">
+  <%= image_tag "background.png", :class => "stretch" %>
+  <div id="fullDiv">
+    <div class="imagecenter">
+      <h1>Choose some friends!</h1>
+      <%= form_tag("/stories") do %>
+        <div class="field">
+          Pick a <b><%= label_tag "Friend" %></b><br />
+          <%= select(:story, :friend_id_1, @friends.sort, {:include_blank => true}) %>
+        </div>
+        <div class="field">
+          Pick another <b><%= label_tag "Friend" %></b><br />
+          <%= select(:story, :friend_id_2, @friends.sort, {:include_blank => true}) %>
+        </div>
+        <div class="actions">
+          <%= submit_tag 'Next' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

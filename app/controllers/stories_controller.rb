@@ -22,7 +22,6 @@ class StoriesController < ApplicationController
   end
 
   # GET /stories/new
-  # GET /stories/new.json
   def new
     if !current_user? || !access_token?
       flash[:error] = "Login first"
@@ -31,26 +30,42 @@ class StoriesController < ApplicationController
     @user = current_user
     @access_token = access_token
     @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
-    @template = Template.random
-    @keywords = @template.keywords_to_specify
+    session[:template_id] = Template.random.id
+    session[:story_params] = nil
+    session[:images] = nil
+    session[:keywords] = nil
     @story = Story.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @story }
-    end
   end
 
-  # GET /stories/1/edit
-  def edit
+  # GET /stories/keywords
+  def keywords
     if !current_user? || !access_token?
       flash[:error] = "Login first"
       redirect_to welcome_index_path
     end
-    @user = current_user
-    @access_token = access_token
-    @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
-    @story = Story.find(params[:id])
+    @template = Template.find(session[:template_id])
+    @keywords = @template.keywords_to_specify
+    session[:story_params][:title] = @template.title
+  end
+
+  # POST /stories/images.js
+  def images
+    if !current_user? || !access_token? || !session[:story_params]
+      flash[:error] = "Login first"
+      redirect_to welcome_index_path
+    end
+    @template = Template.find(session[:template_id])
+    image_keywords = @template.keywords_by_type["IMAGE"]
+    session[:images] = grab_images(
+      image_keywords,
+      current_user.facebook_id,
+      session[:story_params][:friend_id_1],
+      session[:story_params][:friend_id_2]
+    )
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /stories
@@ -59,21 +74,29 @@ class StoriesController < ApplicationController
       flash[:error] = "Login first"
       redirect_to welcome_index_path
     end
-    @user = current_user
-    @story = Story.new(params[:story])
-    @story.user = current_user
-    @template = Template.find(params[:template])
-    @images = grab_images(@user.facebook_id, @story.friend_id_1, @story.friend_id_2)
-    @story.body = @template.build_body(
-      get_first_name(access_token, @user.facebook_id),
-      get_first_name(access_token, @story.friend_id_1),
-      get_first_name(access_token, @story.friend_id_2),
-      params[:keyword], @images
-    )
+    if params[:story] and !params[:keyword]
+      # Completed the friend select, pick keywords
+      session[:story_params] = params[:story]
+      redirect_to stories_keywords_path
+    elsif session[:story_params] and params[:keyword] and session[:images]
+      # Complete the story creation
+      @user = current_user
+      @story = Story.new(session[:story_params])
+      @story.user = current_user
+      @template = Template.find(session[:template_id])
+      @story.body = @template.build_body(
+        get_first_name(access_token, @user.facebook_id),
+        get_first_name(access_token, @story.friend_id_1),
+        get_first_name(access_token, @story.friend_id_2),
+        params[:keyword], session[:images]
+      )
 
-    if @story.save
-      redirect_to @story, notice: 'Story was successfully created.'
-      #@graph.put_connections("me", "notes", :subject => "a quick test post from teh graph API", :message => all_the_details)
+      if @story.save
+        redirect_to @story, notice: 'Story was successfully created.'
+        #@graph.put_connections("me", "notes", :subject => "a quick test post from teh graph API", :message => all_the_details)
+      else
+        redirect_to welcome_index_path, notice: 'Problem building story.'
+      end
     else
       redirect_to welcome_index_path, notice: 'Problem building story.'
     end
@@ -107,17 +130,30 @@ class StoriesController < ApplicationController
     end
   end
 
-  def grab_images(self_id, friend1_id, friend2_id)
-    @access_token = access_token
-    @story_images = Hash.new
-    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 500, 500, true)
-    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 500, 500, true)
-    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 500, 500, true)
-    @story_images["<PT_IMAGE_4>"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 500, 500)
-    @story_images["<PT_IMAGE_5>"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 500, 500)
-    @story_images["<PT_IMAGE_6>"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 500, 500)
-    @story_images["<PT_IMAGE_7>"] = getThreeSomePhoto(self_id, friend1_id, friend2_id,  @access_token, 500, 500)
-    @story_images
+  def grab_images(image_keywords, self_id, friend1_id, friend2_id)
+    story_images = Hash.new
+    image_keywords.each do |keyword|
+      photo =
+        if keyword.match(/PT_IMAGE_1/)
+          getFriendPhoto(self_id, access_token, 500, 500, true)
+        elsif keyword.match(/PT_IMAGE_2/)
+          getFriendPhoto(friend1_id, access_token, 500, 500, true)
+        elsif keyword.match(/PT_IMAGE_3/)
+          getFriendPhoto(friend2_id, access_token, 500, 500, true)
+        elsif keyword.match(/PT_IMAGE_4/)
+          getFriendshipPhoto(self_id, friend1_id, access_token, 500, 500)
+        elsif keyword.match(/PT_IMAGE_5/)
+          getFriendshipPhoto(friend1_id, friend2_id, access_token, 500, 500)
+        elsif keyword.match(/PT_IMAGE_6/)
+          getFriendshipPhoto(self_id, friend2_id, access_token, 500, 500)
+        elsif keyword.match(/PT_IMAGE_7/)
+          getThreeSomePhoto(self_id, friend1_id, friend2_id, access_token, 500, 500)
+        else
+          raise "Bad image keyword!"
+        end
+      story_images[keyword] = photo
+    end
+    story_images
   end
 
 

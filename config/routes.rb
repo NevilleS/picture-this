@@ -15,6 +15,10 @@ PictureThis::Application.routes.draw do
   
   get "static_pages/methods"
 
+  get "stories/keywords"
+
+  post "stories/images"
+
   resources :stories
 
   resources :users
