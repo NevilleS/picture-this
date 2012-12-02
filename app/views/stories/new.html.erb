@@ -1,9 +1,6 @@
 <div id="background">
   <%= image_tag "background.png", :class => "stretch" %>
   <div id="fullDiv">
-    <div class="logo">
-          <%= link_to(image_tag("camera2.png", :height => "100%"), welcome_index_path) %>
-    </div>
     <div class="imagecenter">
       <h1>Choose some friends!</h1>
       <%= form_tag("/stories") do %>
