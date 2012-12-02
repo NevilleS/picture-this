@@ -109,9 +109,13 @@ html, body {margin:0;padding:0;height:100%;}
     text-align: center;
 }
 
-
-
-
+.logomain {
+  position: fixed;
+  height:100px;
+  width:100%;
+  text-align: center;
+  padding-top:20px;
+}
 
 
 
@@ -160,7 +164,7 @@ html, body {margin:0;padding:0;height:100%;}
 #centercontent {
 	position:relative;
 	width:100%;
-	height:500px;
+	height:700px;
 }
 
 #tagline {
@@ -174,6 +178,7 @@ html, body {margin:0;padding:0;height:100%;}
 	font-weight: 900;
 	text-align: center;
 	color: #286fbe;
+  line-height: 150%;
 }
 
 #actionitem {
