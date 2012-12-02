@@ -54,10 +54,12 @@ module WelcomeHelper
     @rand_picture = @data[rand(@data.size)]
     if @rand_picture.nil? and autofallback
       return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
+    elsif @rand_picture.nil? and !autofallback
+      return_image_string = nil
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
-     width = @rand_picture["src_big_width"]
+      width = @rand_picture["src_big_width"]
 
       heightFactor = max_height * 1.0 / height
       widthFactor = max_width * 1.0 / width

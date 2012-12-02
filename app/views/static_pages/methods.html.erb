@@ -15,16 +15,24 @@
     @friend2 = 122603389
   %>
 
-<h2>Get a random  picture of two people together (scaled beautifully), fallback to individual if fails</h2>
+<h2>Get a random picture of three people together (scaled beautifully)</h2>
+<% @friendshiptPic = getThreeSomePhoto(122604676, 122603619, 122613830,@access_token, 300, 300) %>
+
+<%= raw @friendshiptPic %>
+
+
+
+<h2>Get a random picture of two people together (scaled beautifully), fallback to individual if fails</h2>
 <% @friendshipPic01 = getFriendshipPhoto(@me, @friend1, @access_token, 300, 300, true) %>
-<% if ( @friendshipPic02.nil? ) %>
+<% if ( @friendshipPic01.nil? ) %>
   Nothing to show<br />
 <% else %>
-  <%= raw @friendshipPic02 %> <br />
+  <%= raw @friendshipPic01 %> <br />
 <% end %>
 
 
-<h2>Get a random  picture of two people together (success scenario) (scaled beautifully), null otherwise</h2>
+
+<h2>Get a random picture of two people together (success scenario) (scaled beautifully), null otherwise</h2>
 <% @friendshipPic02 = getFriendshipPhoto(@me, @friend2, @access_token, 300, 300, true) %>
 <% if ( @friendshipPic02.nil? ) %>
   Nothing to show<br />
@@ -34,7 +42,7 @@
 
 
 
-<h2>Get a random  picture of two people together (failure scenario) (scaled beautifully), null otherwise</h2>
+<h2>Get a random picture of two people together (failure scenario) (scaled beautifully), null otherwise</h2>
 <% @friendshipPic03 = getFriendshipPhoto(@me, @friend2, @access_token, 300, 300, false) %>
 <% if ( @friendshipPic03.nil? ) %>
   Nothing to show<br />
@@ -43,15 +51,12 @@
 <% end %>
 
 
-<h2>Get a random  picture of three people together (scaled beautifully)</h2>
+
+<h2>Get a random picture of three people together (scaled beautifully)</h2>
 <% @friendshiptPic = getThreeSomePhoto(122604676, 122603619, 122613830,@access_token, 300, 300) %>
 
 <%= raw @friendshiptPic %>
 
-<h2>Get a random picture of a person (scaled beautifully)</h2>
-<% @friendPic = getFriendPhoto(122603619, @access_token, 300, 300) %>
-
-<%= raw @friendPic %>
 </br>
 
 
