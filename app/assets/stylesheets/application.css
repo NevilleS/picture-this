@@ -23,8 +23,6 @@ html, body {margin:0;padding:0;height:100%;}
 	src: url('JandaManateeSolid.ttf');
 }
 
-
-
 /*This defines the borders of the page*/
 #top, #bottom, #left, #right {
   background: #982DAD;
@@ -97,7 +95,6 @@ html, body {margin:0;padding:0;height:100%;}
     position: fixed; 
     left: 0px; 
     top: 0px; 
-    z-index: -999; /* Ensure div tag stays behind content; -999 might work, too. */
 }
 
 .stretch {

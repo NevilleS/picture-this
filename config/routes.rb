@@ -1,12 +1,13 @@
 PictureThis::Application.routes.draw do
   resources :templates
 
-
   get "static_pages/methods"
 
   get "welcome/index"
 
   get "welcome/login"
+
+  get "welcome/logout"
 
   get "welcome/callback"
   

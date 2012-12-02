@@ -1,42 +1,42 @@
 class WelcomeController < ApplicationController
   def index
     if !access_token?
-      redirect_to welcome_login_path
-      return
-    end
-    @access_token = access_token
+      # Send an oauth request to Facebook
+      @oauth = Koala::Facebook::OAuth.new(APPID, SECRET, welcome_callback_url)
+      @fb_login_url = @oauth.url_for_oauth_code(:permissions => "email,user_photos,friends_photos,publish_stream")
+    else
+      @access_token = access_token
 
-    if !current_user?
-      # Get the user info
-      @graph = Koala::Facebook::API.new(@access_token)
-      @fbuser = @graph.get_object("me")
-      @name = @fbuser["name"]
-      @email = @fbuser["email"]
-      @id = @fbuser["id"]
+      # Logged in. Create a user in our db, if one doesn't exist
+      if !current_user?
+        # Get the user info
+        @graph = Koala::Facebook::API.new(@access_token)
+        @fbuser = @graph.get_object("me")
+        @name = @fbuser["name"]
+        @email = @fbuser["email"]
+        @id = @fbuser["id"]
 
-      # Find the user in our db
-      @user = User.find_by_email(@email)
-      if @user.nil?
-        @user = User.new
-        @user.name = @name
-        @user.email = @email
-        @user.facebook_id = @id
-        @user.save
+        # Find the user in our db
+        @user = User.find_by_email(@email)
+        if @user.nil?
+          @user = User.new
+          @user.name = @name
+          @user.email = @email
+          @user.facebook_id = @id
+          @user.save
+        end
+        session[:user_id] = @user.id
       end
-      session[:user_id] = @user.id
+      @user = current_user
     end
-    @user = current_user
   end
 
-  def login
-    if access_token?
-      redirect_to welcome_index_path
-      return
-    end
-
-    # Send an oauth request to Facebook
-    @oauth = Koala::Facebook::OAuth.new(APPID, SECRET, welcome_callback_url)
-    @fb_login_url = @oauth.url_for_oauth_code(:permissions => "email,user_photos,friends_photos,publish_stream")
+  # Logout of the application
+  def logout
+    session[:access_token] = nil
+    session[:current_user] = nil
+    flash[:notice] = "Logged out"
+    redirect_to welcome_index_path
   end
 
   # Callback from Facebook API
