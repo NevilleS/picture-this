@@ -53,6 +53,9 @@ Template.create(
     <div class="imagecenter"><PT_IMAGE_7_1>
       <br /><br/>
     </div>
+    <div class="storyline5"> <div class="storyplotDiv">
+      ~ Le Fin ~<br/><br/>
+    </div></div>
     </div>
   }
 )
