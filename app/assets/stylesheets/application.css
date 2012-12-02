@@ -27,7 +27,7 @@ html, body {margin:0;padding:0;height:100%;}
 
 /*This defines the borders of the page*/
 #top, #bottom, #left, #right {
-  background: #286fbe;
+  background: #982DAD;
   position: fixed;
   z-index: 1000;
 }
@@ -71,55 +71,19 @@ html, body {margin:0;padding:0;height:100%;}
   transition-duration: 1s;
 }
 
-
-#storyDiv {
-  display:block;
-  position:absolute;
-  height:auto;
-  bottom:0;
-  top:0;
-  left:0;
-  right:0;
-  color:#000000;
-  margin-top: 15px;
-  margin-right: 40px;
-  margin-left: 40px;
-  margin-bottom: 20px;
-  overflow: hidden; /* or auto or scroll */
-  font-family: cool_font;
-  font-size:24pt;
-}
-
 .storypictureDiv {
-    display: table;
     float: right;
     overflow: hidden;
     width: 50%; 
-    height: 100%;
 }
-
-.storypictureDiv a {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-
 
 
 .storyplotDiv {
-    display: table;
-    float: left;
-    overflow: hidden;
+  padding-left: 40px;
+
     width: 40%; 
-    height: 100%;
 }
 
-.storyplotDiv a {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
 
 .logomain {
   position: fixed;
@@ -169,8 +133,8 @@ html, body {margin:0;padding:0;height:100%;}
 	position: fixed;
 	height:50px;
 	float:left;
-	padding-left:10px;
-	padding-top:20px;
+	padding-left:20px;
+	padding-top:10px;
 }
 
 #centercontent {
