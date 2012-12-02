@@ -1,25 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @story.title %>
-</p>
-
-<p>
-  <b>Friend #1:</b>
-  <%= @story.friend_id_1 %>
-</p>
-
-<p>
-  <b>Friend #2:</b>
-  <%= @story.friend_id_2 %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= raw (@story.body) %>
-</p>
-
-
-<%= link_to 'Edit', edit_story_path(@story) %> |
-<%= link_to 'Back', welcome_index_path %>
+<div id="storyDiv">
+  <div class="color-change" id="left"></div>
+  <div class="color-change" id="right"></div>
+  <div class="color-change" id="top"></div>
+  <div class="color-change" id="bottom"></div>
+  <div class="logo">
+    <%= image_tag "camera2.png", :height => "100%" %>
+  </div>
+  <div class="storyplotDiv">
+      <%= raw(@story.body) %>
+  </div>
+</div>
