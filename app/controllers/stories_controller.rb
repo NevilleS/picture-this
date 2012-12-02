@@ -73,6 +73,7 @@ class StoriesController < ApplicationController
 
     if @story.save
       redirect_to @story, notice: 'Story was successfully created.'
+      #@graph.put_connections("me", "notes", :subject => "a quick test post from teh graph API", :message => all_the_details)
     else
       redirect_to welcome_index_path, notice: 'Problem building story.'
     end
@@ -139,7 +140,8 @@ class StoriesController < ApplicationController
     rand_picture = data[rand(data.size)]
 
     if rand_picture.nil? and autorecover
-      return_image_string = "Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " will have to relax his/her security settings. For now... here's a cat!</b><img src=\"http://thecatapi.com/api/images/get\?size=med\"/>"
+      return_image_string = "<div class=\"error_text\">Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " will have to relax his/her security settings. For now... here's a cat!</b></div><br/>
+      <img src=\"http://thecatapi.com/api/images/get\?size=med\"/><br/>"
     elsif rand_picture.nil? and !autorecover
       return_image_string = nil
     else
