@@ -36,14 +36,14 @@ class Template < ActiveRecord::Base
     end
   end
 
-  # Get a hash of the keywords to specify for this template, which filters out the "USER" and "FRIEND" types
+  # Get a hash of the keywords to specify for this template, which filters out the "USER", "FRIEND", and IMAGE types
   def keywords_to_specify
     keywords = keywords_by_type
-    return keywords.select { |key| !["USER", "FRIEND"].include?(key) }
+    return keywords.select { |key| !["USER", "FRIEND", "IMAGE"].include?(key) }
   end
 
   # Generate a story body from the given template and keyword hash
-  def build_body(user, friend_1, friend_2, keywords)
+  def build_body(user, friend_1, friend_2, keywords, images)
     # Make a copy of the template body
     body = self.body
 
@@ -56,6 +56,11 @@ class Template < ActiveRecord::Base
 
     # Substitute the remaining keywords from the hash
     keywords.each do |key, value|
+      body.gsub!(key, value)
+    end
+
+    # Substitute the image keywords from the hash
+    images.each do |key, value|
       body.gsub!(key, value)
     end
 
