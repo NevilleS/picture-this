@@ -31,7 +31,7 @@ Template.create(
     </div>
     
     <div class="storyline3"> <div class="storyplotDiv">
-      Without thinking, <PT_USER> grabbed the nearest <PT_NOUN_2>, but it was too late.<br />
+      Without thinking, <PT_USER> <PT_VERB (PAST TENSE)_1> and grabbed the nearest <PT_NOUN_2>, but it was too late.<br />
     </div></div><br/><br/>
     <div class="imagecenter"><PT_IMAGE_1_1> 
       <br /><br/>
