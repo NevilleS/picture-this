@@ -9,6 +9,8 @@ PictureThis::Application.routes.draw do
 
   get "welcome/login"
 
+  get "welcome/logout"
+
   get "welcome/callback"
   
   get "static_pages/methods"

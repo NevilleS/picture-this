@@ -110,13 +110,13 @@ class StoriesController < ApplicationController
   def grab_images(self_id, friend1_id, friend2_id)
     @access_token = access_token
     @story_images = Hash.new
-    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 300, 300, true)
-    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 300, 300, true)
-    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 300, 300, true)
-    @story_images["<PT_IMAGE_4>"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 300, 300)
-    @story_images["<PT_IMAGE_5>"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 300, 300)
-    @story_images["<PT_IMAGE_6>"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 300, 300)
-    @story_images["<PT_IMAGE_7>"] = getThreeSomePhoto(self_id, friend1_id, friend2_id,  @access_token, 300, 300)
+    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 500, 500, true)
+    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 500, 500, true)
+    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 500, 500, true)
+    @story_images["<PT_IMAGE_4>"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 500, 500)
+    @story_images["<PT_IMAGE_5>"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 500, 500)
+    @story_images["<PT_IMAGE_6>"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 500, 500)
+    @story_images["<PT_IMAGE_7>"] = getThreeSomePhoto(self_id, friend1_id, friend2_id,  @access_token, 500, 500)
     @story_images
   end
 
