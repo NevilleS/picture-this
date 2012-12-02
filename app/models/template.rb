@@ -56,6 +56,7 @@ class Template < ActiveRecord::Base
 
     # Substitute the remaining keywords from the hash
     keywords.each do |key, value|
+      value = value.pluralize if key =~ /PLURAL/
       body.gsub!(key, value)
     end
 

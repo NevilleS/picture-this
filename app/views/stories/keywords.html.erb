@@ -1,0 +1,29 @@
+<div id="background">
+  <%= image_tag "background.png", :class => "stretch" %>
+  <div id="fullDiv">
+    <div class="imagecenter">
+      <h1>Choose some keywords!</h1>
+      <%= form_tag ('/stories') do %>
+        <%= hidden_field_tag :template, @template.id %>
+        <% @keywords.each do |key, values| %>
+          <% values.each do |value| %>
+            <div class="field">
+              Pick a <b><%= label_tag key.downcase %></b><br />
+              <%= text_field(:keyword, value) %>
+            </div>
+          <% end %>
+        <% end %>
+        <div id="submitbutton">
+          Loading images...<br/><%= image_tag "loading.gif", size: "20x20"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $.ajax({
+    url: "/stories/images",
+    type: "POST",
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+  });
+</script>
