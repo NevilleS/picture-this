@@ -109,9 +109,9 @@ class StoriesController < ApplicationController
   def grab_images(self_id, friend1_id, friend2_id)
     @access_token = access_token
     @story_images = Hash.new
-    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 300, 300)
-    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 300, 300)
-    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 300, 300, true)
+    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 300, 300, true)
+    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 300, 300, true)
     @story_images["<PT_IMAGE_4>"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 300, 300)
     @story_images["<PT_IMAGE_5>"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 300, 300)
     @story_images["<PT_IMAGE_6>"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 300, 300)
@@ -129,7 +129,7 @@ class StoriesController < ApplicationController
     @photo
   end
  
-  def getFriendPhoto(friendId, access_token, max_width, max_height)
+  def getFriendPhoto(friendId, access_token, max_width, max_height, autorecover)
     access_token = access_token
     puts access_token
     graph = Koala::Facebook::API.new(access_token)
@@ -138,8 +138,10 @@ class StoriesController < ApplicationController
     data = graph.fql_query(query)
     rand_picture = data[rand(data.size)]
 
-    if rand_picture.nil?
+    if rand_picture.nil? and autorecover
       return_image_string = "Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. Why don't you try adding them as a friend?</b>"
+    elsif rand_picture.nil? and !autorecover
+      return_image_string = nil
     else
       # Scale the image 
       height = rand_picture["src_big_height"]
@@ -176,7 +178,10 @@ class StoriesController < ApplicationController
     @data = @graph.fql_query(query)
     @rand_picture = @data[rand(@data.size)]
     if @rand_picture.nil?
-      return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
+      return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height, false)
+      if return_image_string.nil?
+        return_image_string = getFriendPhoto(friendId1,access_token,max_width,max_height, true)
+      end
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
@@ -214,7 +219,7 @@ class StoriesController < ApplicationController
     @data = @graph.fql_query(query)
     @rand_picture = @data[rand(@data.size)]
     if @rand_picture.nil?
-      return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
+      return_image_string = getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
