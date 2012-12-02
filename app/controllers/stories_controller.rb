@@ -139,7 +139,7 @@ class StoriesController < ApplicationController
     rand_picture = data[rand(data.size)]
 
     if rand_picture.nil? and autorecover
-      return_image_string = "Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. Why don't you try adding them as a friend?</b>"
+      return_image_string = "Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " will have to relax his/her security settings. For now... here's a cat!</b><img src=\"http://thecatapi.com/api/images/get\?size=med\"/>"
     elsif rand_picture.nil? and !autorecover
       return_image_string = nil
     else

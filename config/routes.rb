@@ -1,6 +1,7 @@
 PictureThis::Application.routes.draw do
   resources :templates
-
+  
+  get "static_pages/cats"
 
   get "static_pages/methods"
 
