@@ -30,7 +30,8 @@ class StoriesController < ApplicationController
     @user = current_user
     @access_token = access_token
     @friends = get_friends(access_token).collect { |f| [f["name"], f["id"]] }
-    session[:template_id] = Template.random.id
+    @template = Template.random
+    session[:template_id] = @template.id
     session[:story_params] = nil
     session[:images] = nil
     session[:keywords] = nil
