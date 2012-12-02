@@ -21,9 +21,11 @@
   </div>
 </div>
 <script>
-  $.ajax({
-    url: "/stories/images",
-    type: "POST",
-    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+  $(window).load(function() {
+    $.ajax({
+      url: "/stories/images",
+      type: "POST",
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    });
   });
 </script>
