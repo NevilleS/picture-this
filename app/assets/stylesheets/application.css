@@ -169,10 +169,14 @@ body div {
   margin-right: 30px;
   margin-left: 30px;
   margin-bottom: 30px;
-  background-color: rgba(256,256,256,0.95);
+  background-color: rgba(255,255,255,0.95);
   color:#000000;
   border:2px solid #FFFFFF;
   overflow: hidden; /* or auto or scroll */
+  -moz-box-shadow: 0 0 5px 5px #888;
+  -webkit-box-shadow: 0 0 5px 5px#888;
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
+
 }
 
 #fullDiv2 {
@@ -187,10 +191,13 @@ body div {
   margin-right: 30px;
   margin-left: 30px;
   margin-bottom: 30px;
-  background-color: rgba(256,256,256,0.95);
+  background-color: rgba(255,255,255,0.95);
   color:#000000;
   border:2px solid #FFFFFF;
   overflow: auto; /* or auto or scroll */
+  -moz-box-shadow: 0 0 5px 5px #888;
+  -webkit-box-shadow: 0 0 5px 5px#888;
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.5);
 }
 
 
@@ -226,7 +233,7 @@ body div {
 	position:relative;
 	width:40%;
 	float:right;
-	margin-top:260px;
+	margin-top:240px;
 }
 #quote {
 	position:relative;
