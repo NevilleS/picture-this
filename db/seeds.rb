@@ -60,3 +60,55 @@ Template.create(
     </div>
   }
 )
+Template.create(
+  title: "The Surprise",
+  body:
+  %{
+    
+    <br/><br/><br/>
+    <div class="titlestory"> Picture this...</div><br/><br/>
+    <div class="storyline1"> <div class="storyplotDiv">
+      <PT_USER> had always dreamed of <PT_VERB (ending in -ing)_1> with <PT_NOUN_PLURAL_1>.<br />
+    </div></div><br/><br/>
+    <div class="storyfont">
+      <div class="imagecenter"><PT_IMAGE_1_1> 
+      <br/><br/>
+      <img src="/assets/divider.png">
+    </div>
+     
+    <div class="storyline2"> <div class="storyplotDiv">
+      <PT_FRIEND_1> knew about this dream, so <PT_FRIEND_1> came up with a plan. They would find <PT_NUMBER_1> <PT_NOUN_PLURAL_1> and surprise <PT_USER> with them!<br/>
+    </div></div><br/><br/>
+    <div class="imagecenter"><PT_IMAGE_2_1>
+      <br/><br/>
+      <img src="/assets/divider.png">
+    </div>
+    
+    <div class="storyline3"> <div class="storyplotDiv">
+      To do this, <PT_FRIEND_1> needed <PT_FRIEND_2>'s help. After all, <PT_FRIEND_2> had <PT_VERB (past tense)_2> with <PT_USER> many times and knew a thing or two about <PT_NOUN_PLURAL_1>.<br/>
+    </div></div><br/><br/>
+    <div class="imagecenter"><PT_IMAGE_3_1> 
+      <br /><br/>
+      <img src="/assets/divider.png">
+    </div> 
+    
+    <div class="storyline4"> <div class="storyplotDiv">
+      One day, while <PT_USER> was out, <PT_FRIEND_1> and <PT_FRIEND_2> <PT_VERB (past tense)_3> their way to the house and set up the surprise.<br/>
+    </div></div><br/><br/>  
+    <div class="imagecenter"><PT_IMAGE_5_1>
+      <br/><br/>
+      <img src="/assets/divider.png">
+    </div>
+    
+    <div class="storyline5"> <div class="storyplotDiv">
+      When <PT_USER> finally arrived, they started <PT_VERB (ending in -ing)_2>! They never thought they would be <PT_VERB (ending in ing)_1> so soon. Thanks, guys!<br/>
+    </div></div><br/><br/>
+    <div class="imagecenter"><PT_IMAGE_1_2>
+      <br /><br/>
+    </div>
+    <div class="storyline5"> <div class="storyplotDiv">
+      ~ Le Fin ~<br/><br/>
+    </div></div>
+    </div>
+  }
+)
