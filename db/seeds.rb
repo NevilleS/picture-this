@@ -33,7 +33,7 @@ Template.create(
     <div class="storyline3"> <div class="storyplotDiv">
       <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_NOUN_PLURAL_2> and ran for shelter.<br />
     </div></div><br/><br/>
-    <div class="imagecenter"><PT_IMAGE_4_1> 
+    <div class="imagecenter"><PT_IMAGE_4_2> 
       <br /><br/>
       <img src="/assets/divider.png">
     </div> 
