@@ -2,6 +2,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
+    redirect_to welcome_index_path
     @stories = Story.all
 
     respond_to do |format|
@@ -116,6 +117,7 @@ class StoriesController < ApplicationController
   # PUT /stories/1
   # PUT /stories/1.json
   def update
+    redirect_to welcome_index_path
     @story = Story.find(params[:id])
 
     respond_to do |format|
