@@ -25,8 +25,12 @@ class ApplicationController < ActionController::Base
 
   # Get the current user
   def current_user
-    unless session[:user_id].nil?
-      return User.find(session[:user_id])
+    begin
+      unless session[:user_id].nil?
+        return User.find(session[:user_id])
+      end
+    rescue
+      return nil
     end
     return nil
   end
