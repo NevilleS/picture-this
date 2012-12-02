@@ -131,29 +131,36 @@ class StoriesController < ApplicationController
   end
 
   def grab_images(image_keywords, self_id, friend1_id, friend2_id)
-    story_images = Hash.new
+    @story_images = Hash.new
     image_keywords.each do |keyword|
       photo =
         if keyword.match(/PT_IMAGE_1/)
+          puts keyword
           getFriendPhoto(self_id, access_token, 500, 500, true)
         elsif keyword.match(/PT_IMAGE_2/)
+          puts keyword
           getFriendPhoto(friend1_id, access_token, 500, 500, true)
         elsif keyword.match(/PT_IMAGE_3/)
+          puts keyword
           getFriendPhoto(friend2_id, access_token, 500, 500, true)
         elsif keyword.match(/PT_IMAGE_4/)
+          puts keyword
           getFriendshipPhoto(self_id, friend1_id, access_token, 500, 500)
         elsif keyword.match(/PT_IMAGE_5/)
+          puts keyword
           getFriendshipPhoto(friend1_id, friend2_id, access_token, 500, 500)
         elsif keyword.match(/PT_IMAGE_6/)
+          puts keyword
           getFriendshipPhoto(self_id, friend2_id, access_token, 500, 500)
         elsif keyword.match(/PT_IMAGE_7/)
+          puts keyword
           getThreeSomePhoto(self_id, friend1_id, friend2_id, access_token, 500, 500)
         else
           raise "Bad image keyword!"
         end
-      story_images[keyword] = photo
+      @story_images[keyword] = photo
     end
-    story_images
+    @story_images
   end
 
 
@@ -167,118 +174,182 @@ class StoriesController < ApplicationController
   end
  
   def getFriendPhoto(friendId, access_token, max_width, max_height, autorecover)
-    access_token = access_token
-    puts access_token
     graph = Koala::Facebook::API.new(access_token)
     query = "SELECT pid, src, src_big, src_big_height, src_big_width, caption FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = " + friendId.to_s + ") limit 100"
 
     data = graph.fql_query(query)
-    rand_picture = data[rand(data.size)]
-
-    if rand_picture.nil? and autorecover
-      return_image_string = "<div class=\"error_text\">Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " will have to relax his/her security settings. For now... here's a cat!</b></div><br/>
+    puts "QUERY DONE - friend"
+    if data.size == 0 and autorecover
+      puts "ONE"
+      return "<div class=\"error_text\">Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " will have to relax his/her security settings. For now... here's a cat!</b></div><br/>
       <img src=\"http://thecatapi.com/api/images/get\?size=med\"/><br/>"
-    elsif rand_picture.nil? and !autorecover
-      return_image_string = nil
+    elsif data.size == 0 and !autorecover
+      puts "TWO"
+      return nil
     else
-      # Scale the image 
-      height = rand_picture["src_big_height"]
-      width = rand_picture["src_big_width"]
-
-      heightFactor = max_height * 1.0 / height
-      widthFactor = max_width * 1.0 / width
-
-      if heightFactor > widthFactor
-        puts widthFactor
-        factor = widthFactor
-      else
-        puts heightFactor
-        factor = heightFactor
+      puts "THREE"
+      rand_index = rand(data.size)
+      rand_photo = nil 
+    
+      # Ensure uniqueness ...
+      i = 0
+      while i < 3 do
+        if isUniquePhoto?(data[rand_index]["src_big"])
+          rand_picture = data[rand_index]
+        end
+        i += 1
       end
+     
+      if rand_picture.nil?
+        return "<div class=\"error_text\">Sorry, looks like your friend <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " doesn't have many photos. For now... here's a cat!</b></div><br/>
+        <img src=\"http://thecatapi.com/api/images/get\?size=med\"/><br/>"
+      else
+        # Scale the image 
+        height = rand_picture["src_big_height"]
+        width = rand_picture["src_big_width"]
 
-      newWidth = width * factor
-      newHeight = height * factor
+        heightFactor = max_height * 1.0 / height
+        widthFactor = max_width * 1.0 / width
 
-      puts rand_picture["src_big"]
+        if heightFactor > widthFactor
+          factor = widthFactor
+        else
+          factor = heightFactor
+        end
 
-      return_image_string = "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+        newWidth = width * factor
+        newHeight = height * factor
+
+        return "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+      end
     end
-    return_image_string
+
+    # in this case, return nil
+    return nil
   end
 
 
   def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
     
-    @graph = Koala::Facebook::API.new(access_token)
-    @access_token = access_token
+    graph = Koala::Facebook::API.new(access_token)
     query = "SELECT pid, src_big, src_big_height, src_big_width, caption FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId1.to_s+") AND pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId2.to_s+")"
     
-    @data = @graph.fql_query(query)
-    @rand_picture = @data[rand(@data.size)]
-    if @rand_picture.nil?
+    data = graph.fql_query(query)
+    puts "QUERY DONE - friendship"
+
+    if data.size == 0
+      puts "ONE"
       return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height, false)
       if return_image_string.nil?
+        puts "TWO"
         return_image_string = getFriendPhoto(friendId1,access_token,max_width,max_height, true)
       end
     else
-      # Scale the image 
-      height = @rand_picture["src_big_height"]
-      width = @rand_picture["src_big_width"]
+      puts "THREE"
+      # Ensure uniqueness ...
+      i = 0
 
-      heightFactor = max_height * 1.0 / height
-      widthFactor = max_width * 1.0 / width
+      rand_index = rand(data.size)
+      rand_photo = nil
 
-      if heightFactor > widthFactor
-        puts widthFactor
-        factor = widthFactor
-      else
-        puts heightFactor
-        factor = heightFactor
+      while i < 3 do
+        if !isUniquePhoto?(data[rand_index]["src_big"])
+          rand_index = rand(data.size)
+        else
+          rand_picture = data[rand_index]
+        end
+        i += 1
       end
 
-      newWidth = width * factor
-      newHeight = height * factor
+      if rand_picture.nil?
+        return "<div class=\"error_text\">Sorry, looks like your friend <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " doesn't have many photos. For now... here's a cat!</b></div><br/>
+        <img src=\"http://thecatapi.com/api/images/get\?size=med\"/><br/>"
+      else
+        # Scale the image 
+        height = rand_picture["src_big_height"]
+        width = rand_picture["src_big_width"]
 
-      puts @rand_picture["src_big"]
+        heightFactor = max_height * 1.0 / height
+        widthFactor = max_width * 1.0 / width
 
-      return_image_string = "<img src=\"" + @rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+        if heightFactor > widthFactor
+          factor = widthFactor
+        else
+          factor = heightFactor
+        end
+
+        newWidth = width * factor
+        newHeight = height * factor
+        
+        return "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+      end
     end
-    return_image_string
+    return return_image_string # may have been popualted above, or nil, either way, return
   end
 
 
   def getThreeSomePhoto(friendId1, friendId2, friendId3, access_token, max_width, max_height)
-    
-    @graph = Koala::Facebook::API.new(access_token)
-    @access_token = access_token
+    graph = Koala::Facebook::API.new(access_token)
+    query = "SELECT pid, src_big, src_big_height, src_big_width, caption FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId1.to_s+") AND pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId2.to_s+") AND pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId3.to_s+")"
 
-   query = "SELECT pid, src_big, src_big_height, src_big_width, caption FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId1.to_s+") AND pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId2.to_s+") AND pid IN (SELECT pid FROM photo_tag WHERE subject = "+friendId3.to_s+")"
+    data = graph.fql_query(query)
+    puts "QUERY DONE - three-way frienships"
 
-    @data = @graph.fql_query(query)
-    @rand_picture = @data[rand(@data.size)]
-    if @rand_picture.nil?
+    if data.size == 0
+      puts "ONE"
       return_image_string = getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
     else
-      # Scale the image 
-      height = @rand_picture["src_big_height"]
-      width = @rand_picture["src_big_width"]
+      puts "TWO"
+      # Ensure uniqueness ...
+      i = 0
 
-      heightFactor = max_height * 1.0 / height
-      widthFactor = max_width * 1.0 / width
+      rand_index = rand(data.size)
+      rand_photo = nil
 
-      if heightFactor > widthFactor
-        puts widthFactor
-        factor = widthFactor
-      else
-        puts heightFactor
-        factor = heightFactor
+      while i < 3 do
+        if !isUniquePhoto?(data[rand_index]["src_big"])
+          rand_index = rand(data.size) 
+        else
+          rand_picture = data[rand_index]
+        end
+        i += 1
       end
 
-      newWidth = width * factor
-      newHeight = height * factor
+      if rand_picture.nil?
+        return "<div class=\"error_text\">Sorry, looks like your friend <b>" + get_first_name(access_token,friendId) + "'s</b> photos. " + get_first_name(access_token,friendId) + " doesn't have many photos. For now... here's a cat!</b></div><br/>
+        <img src=\"http://thecatapi.com/api/images/get\?size=med\"/><br/>"
+      else
+        # Scale the image 
+        height = rand_picture["src_big_height"]
+        width = rand_picture["src_big_width"]
 
-      return_image_string = "<img src=\"" + @rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+        heightFactor = max_height * 1.0 / height
+        widthFactor = max_width * 1.0 / width
+
+        if heightFactor > widthFactor
+          factor = widthFactor
+        else
+          factor = heightFactor
+        end
+
+        newWidth = width * factor
+        newHeight = height * factor
+
+        return "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
+      end
     end
     return_image_string
+  end
+
+  def isUniquePhoto?(url)
+    result = true
+    @story_images.each_pair do |key, value|
+      puts "UNIQUE check: is \"" + url + "\" in \"" + value + "\"?"
+      if value.include? url
+        result = false
+        puts "!! UNIQUE image violated: " + url + " matches \"" +  value + "\""
+        break 
+      end
+    end
   end
 end
