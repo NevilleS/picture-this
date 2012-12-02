@@ -10,9 +10,9 @@ Template.create(
   title: "Epic Road Trip",
   body:
   %{<p>
-    <PT_IMAGE_4><br />
+    <PT_IMAGE_1><br />
     Picture this... <PT_USER> and <PT_FRIEND_1> were packing up their <PT_VEHICLE_1> for their road trip to <PT_PLACE_1>.<br />
-    <PT_IMAGE_4><br />
+    <PT_IMAGE_2><br />
     When all of a sudden <PT_NUMBER_1> <PT_OBJECTS_1> fell from <PT_LOCATION_1>!<br />
     <PT_IMAGE_4><br />
     <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_OBJECTS_2> and ran for shelter.<br />
