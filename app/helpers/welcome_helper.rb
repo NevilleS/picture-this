@@ -44,7 +44,7 @@ module WelcomeHelper
   end
 
 
-  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height, autofallback)
+  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
     
     @graph = Koala::Facebook::API.new(access_token)
     @access_token = access_token

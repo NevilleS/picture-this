@@ -109,13 +109,13 @@ class StoriesController < ApplicationController
   def grab_images(self_id, friend1_id, friend2_id)
     @access_token = access_token
     @story_images = Hash.new
-    @story_images["PT_IMAGE_1"] = getFriendPhoto(self_id, @access_token, 300, 300)
-    @story_images["PT_IMAGE_2"] = getFriendPhoto(friend1_id, @access_token, 300, 300)
-    @story_images["PT_IMAGE_3"] = getFriendPhoto(friend2_id, @access_token, 300, 300)
-    @story_images["PT_IMAGE_4"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 300, 300, true)
-    @story_images["PT_IMAGE_5"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 300, 300, true)
-    @story_images["PT_IMAGE_6"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 300, 300, true)
-    @story_images["PT_IMAGE_7"] = getThreeSomePhoto(self_id, friend1_id, friend2_id,  @access_token, 300, 300)
+    @story_images["<PT_IMAGE_1>"] = getFriendPhoto(self_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_2>"] = getFriendPhoto(friend1_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_3>"] = getFriendPhoto(friend2_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_4>"] = getFriendshipPhoto(self_id, friend1_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_5>"] = getFriendshipPhoto(friend1_id, friend2_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_6>"] = getFriendshipPhoto(self_id, friend2_id, @access_token, 300, 300)
+    @story_images["<PT_IMAGE_7>"] = getThreeSomePhoto(self_id, friend1_id, friend2_id,  @access_token, 300, 300)
     @story_images
   end
 
@@ -134,38 +134,40 @@ class StoriesController < ApplicationController
     puts access_token
     graph = Koala::Facebook::API.new(access_token)
     query = "SELECT pid, src, src_big, src_big_height, src_big_width, caption FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = " + friendId.to_s + ") limit 100"
-   puts query
 
     data = graph.fql_query(query)
     rand_picture = data[rand(data.size)]
-    puts data.size
 
-    # Scale the image 
-    height = rand_picture["src_big_height"]
-    width = rand_picture["src_big_width"]
-
-    heightFactor = max_height * 1.0 / height
-    widthFactor = max_width * 1.0 / width
-
-    if heightFactor > widthFactor
-      puts widthFactor
-      factor = widthFactor
+    if rand_picture.nil?
+      return_image_string = "Sorry, looks like you don't have access to view <b>" + get_first_name(access_token,friendId) + "'s</b> photos. Why don't you try adding them as a friend?</b>"
     else
-      puts heightFactor
-      factor = heightFactor
+      # Scale the image 
+      height = rand_picture["src_big_height"]
+      width = rand_picture["src_big_width"]
+
+      heightFactor = max_height * 1.0 / height
+      widthFactor = max_width * 1.0 / width
+
+      if heightFactor > widthFactor
+        puts widthFactor
+        factor = widthFactor
+      else
+        puts heightFactor
+        factor = heightFactor
+      end
+
+      newWidth = width * factor
+      newHeight = height * factor
+
+      puts rand_picture["src_big"]
+
+      return_image_string = "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
     end
-
-    newWidth = width * factor
-    newHeight = height * factor
-
-    puts rand_picture["src_big"]
-
-    return_image_string = "<img src=\"" + rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
     return_image_string
   end
 
 
-  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height, autofallback)
+  def getFriendshipPhoto(friendId1, friendId2, access_token, max_width, max_height)
     
     @graph = Koala::Facebook::API.new(access_token)
     @access_token = access_token
@@ -173,10 +175,8 @@ class StoriesController < ApplicationController
     
     @data = @graph.fql_query(query)
     @rand_picture = @data[rand(@data.size)]
-    if @rand_picture.nil? and autofallback
+    if @rand_picture.nil?
       return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
-    elsif @rand_picture.nil? and !autofallback
-      return_image_string = nil
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
@@ -215,11 +215,10 @@ class StoriesController < ApplicationController
     @rand_picture = @data[rand(@data.size)]
     if @rand_picture.nil?
       return_image_string = getFriendPhoto(friendId2,access_token,max_width,max_height)
-      return_image_string
     else
       # Scale the image 
       height = @rand_picture["src_big_height"]
-     width = @rand_picture["src_big_width"]
+      width = @rand_picture["src_big_width"]
 
       heightFactor = max_height * 1.0 / height
       widthFactor = max_width * 1.0 / width
@@ -235,10 +234,8 @@ class StoriesController < ApplicationController
       newWidth = width * factor
       newHeight = height * factor
 
-      puts @rand_picture["src_big"]
-
       return_image_string = "<img src=\"" + @rand_picture["src_big"] + "\" width=\""+newWidth.to_s+"\" height=\""+newHeight.to_s+"\" />"
-      return_image_string
     end
+    return_image_string
   end
 end
