@@ -14,7 +14,7 @@ Template.create(
     <br/><br/><br/>
     <div class="titlestory"> Picture this...</div><br/><br/>
     <div class="storyline1"> <div class="storyplotDiv">
-      <PT_USER> and <PT_FRIEND_1> were packing up their <PT_VEHICLE_1> for their road trip to <PT_PLACE_1>.<br />
+      <PT_USER> and <PT_FRIEND_1> were packing up their <PT_VEHICLE_1> for their road trip to <PT_CITY_1>.<br />
     </div></div><br/><br/>
     <div class="storyfont">
       <div class="imagecenter"><PT_IMAGE_4_1> 
@@ -23,7 +23,7 @@ Template.create(
     </div>
      
     <div class="storyline2"> <div class="storyplotDiv">
-      When all of a sudden, <PT_FRIEND_1> saw <PT_NUMBER_1> <PT_NOUN_PLURAL_1> fall from <PT_LOCATION_1>!<br />
+      When all of a sudden, <PT_FRIEND_1> saw <PT_NUMBER_1> <PT_NOUN_PLURAL_1> fall from the <PT_LOCATION_1>!<br />
     </div></div><br/><br/>
     <div class="imagecenter"><PT_IMAGE_2_1>
       <br/><br/>
@@ -31,9 +31,9 @@ Template.create(
     </div>
     
     <div class="storyline3"> <div class="storyplotDiv">
-      <PT_USER> and <PT_FRIEND_1> grabbed the nearest <PT_NOUN_PLURAL_2> and ran for shelter.<br />
+      Without thinking, <PT_USER> grabbed the nearest <PT_NOUN_2>, but it was too late.<br />
     </div></div><br/><br/>
-    <div class="imagecenter"><PT_IMAGE_4_1> 
+    <div class="imagecenter"><PT_IMAGE_1_1> 
       <br /><br/>
       <img src="/assets/divider.png">
     </div> 
@@ -48,7 +48,8 @@ Template.create(
     </div>
     
     <div class="storyline5"> <div class="storyplotDiv">
-      MORALE OF THE STORY: <br/> always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_NOUN_PLURAL_3>.<br />
+      In the end, all three went to <PT_CITY_1> together.<br/>
+      Moral of the story: always remember to invite <PT_FRIEND_2> on trips, or pack your own <PT_NOUN_PLURAL_3>.<br />
     </div></div><br/><br/>
     <div class="imagecenter"><PT_IMAGE_7_1>
       <br /><br/>
