@@ -249,6 +249,16 @@ body div {
 	text-align: center;
 	color:#444444;
 }
+#logout {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 10pt;
+}
+#logout a:link { color: black; }
+#logout a:visited { color: black; }
+#logout a:hover { color: black; }
+#logout a:active { color: black; }
 
 /* Form style */
 .fields {
