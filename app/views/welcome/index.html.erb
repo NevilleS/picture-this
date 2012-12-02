@@ -1,6 +1,20 @@
-<p id="notice"><%= notice %></p>
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
-<p>Access Token: <%= @access_token %></p>
-<p>User Page: <%= link_to "#{@user.name}", @user %></p>
-<h1><%= link_to 'Create a story!', new_story_path %></h1>
+<div id="background">
+  <%= image_tag "background.png", :class => "stretch" %>
+    <div id="fullDiv">
+        <div class="logo">
+          <%= image_tag "camera2.png", :height => "100%" %>
+        </div>
+        <div id="centercontent">
+          <p id="notice"><%= notice %></p>
+            <div id="tagline">
+                What crazy adventures will you and your friends get up to next?
+            </div>
+            <div id="actionitem">
+                <%= link_to 'Create a story!', new_story_path %>
+            </div>
+        </div>
+        <div id="quote">
+            "Lisa and Sabrina ran for cover from the giant sock monkey..."
+        </div>
+    </div>
+</div>
