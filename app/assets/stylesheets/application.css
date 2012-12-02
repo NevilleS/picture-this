@@ -109,7 +109,13 @@ html, body {margin:0;padding:0;height:100%;}
     text-align: center;
 }
 
-
+.logomain {
+  position: fixed;
+  height:100px;
+  width:100%;
+  text-align: center;
+  padding-top:20px;
+}
 
 
 
