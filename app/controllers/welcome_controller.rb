@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
 
       # Send an oauth request to Facebook
       @oauth = Koala::Facebook::OAuth.new(APPID, SECRET, welcome_callback_url)
-      @fb_login_url = @oauth.url_for_oauth_code(:permissions => "email,user_photos,friends_photos,publish_stream")
+      @fb_login_url = @oauth.url_for_oauth_code(:permissions => "email,user_photos,friends_photos")
     else
       @access_token = access_token
 
